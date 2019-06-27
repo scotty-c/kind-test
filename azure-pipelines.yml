@@ -1,19 +1,17 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- master
+  branches:
+    include:
+      - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'Ubuntu 16.04'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: GO111MODULE="on" go get sigs.k8s.io/kind@v0.4.0
+  displayName: 'Install kind'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- script: kind create cluster
+  displayName: 'Deploying kind cluster'
+
+- scrip: export KUBECONFIG="$(kind get kubeconfig-path --name="kind")" && kubectl cluster-info
+  displayName: 'Show cluster info'
