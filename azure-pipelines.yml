@@ -9,10 +9,11 @@ pool:
 variables:
   GOPATH: '$(Agent.BuildDirectory)/gopath' # Go workspace path
   GOBIN:  '$(GOPATH)/bin' # Go binaries path
+  GO111MODULE: 'on' 
   modulePath: '$(GOPATH)/src/github.com/$(build.repository.name)' # Path to the module's code
 
 steps:
-- script: GO111MODULE="on" go get sigs.k8s.io/kind@v0.4.0
+- script: go get sigs.k8s.io/kind@v0.4.0
   displayName: 'Install kind'
 
 - script: $(GOBIN)/kind create cluster
