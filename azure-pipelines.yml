@@ -6,6 +6,12 @@ trigger:
 pool:
   vmImage: 'Ubuntu 16.04'
 
+variables:
+  GOPATH: '$(Agent.BuildDirectory)/gopath' # Go workspace path
+  GOROOT: '$(Agent.BuildDirectory)/go' # Go installation path
+  GOBIN:  '$(GOPATH)/bin' # Go binaries path
+  modulePath: '$(GOPATH)/src/github.com/$(build.repository.name)' # Path to the module's code
+
 steps:
 - script: GO111MODULE="on" go get sigs.k8s.io/kind@v0.4.0
   displayName: 'Install kind'
