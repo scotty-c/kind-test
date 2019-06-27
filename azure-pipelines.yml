@@ -13,5 +13,5 @@ steps:
 - script: kind create cluster
   displayName: 'Deploying kind cluster'
 
-- scrip: export KUBECONFIG="$(kind get kubeconfig-path --name="kind")" && kubectl cluster-info
+- script: export KUBECONFIG="$(kind get kubeconfig-path --name="kind")" && kubectl cluster-info
   displayName: 'Show cluster info'
