@@ -8,7 +8,6 @@ pool:
 
 variables:
   GOPATH: '$(Agent.BuildDirectory)/gopath' # Go workspace path
-  GOROOT: '$(Agent.BuildDirectory)/go' # Go installation path
   GOBIN:  '$(GOPATH)/bin' # Go binaries path
   modulePath: '$(GOPATH)/src/github.com/$(build.repository.name)' # Path to the module's code
 
